@@ -1,5 +1,0 @@
-/mnt/data/Recuperacao_Etapa_4_Enzo_Mascarenhas/src/br/senac/assistenciatecnica/OrdensPanel.java:4: error: reference to List is ambiguous
- DefaultTableModel m;JTable t;List<OrdemServico> dados=new ArrayList<>();
-                              ^
-  both interface java.util.List in java.util and class java.awt.List in java.awt match
-1 error
