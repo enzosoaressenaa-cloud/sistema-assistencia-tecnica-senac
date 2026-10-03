@@ -1,0 +1,6 @@
+package br.senac.assistenciatecnica;
+import java.sql.*;import java.time.LocalDate;import java.util.*;
+public class OrdemServicoDAO {
+ public List<OrdemServico> listar()throws SQLException{List<OrdemServico> l=new ArrayList<>();String q="SELECT o.*,c.nome cliente_nome,CONCAT(e.marca,' ',e.modelo) equipamento_nome,t.nome tecnico_nome FROM ordem_servico o JOIN cliente c ON c.id=o.cliente_id JOIN equipamento e ON e.id=o.equipamento_id JOIN tecnico t ON t.id=o.tecnico_id ORDER BY o.id DESC";try(Connection c=ConexaoMySQL.conectar();PreparedStatement p=c.prepareStatement(q);ResultSet r=p.executeQuery()){while(r.next())l.add(new OrdemServico(r.getInt("id"),r.getDate("data_abertura").toLocalDate(),r.getString("descricao_defeito"),r.getString("status"),r.getDouble("valor"),r.getInt("cliente_id"),r.getInt("equipamento_id"),r.getInt("tecnico_id"),r.getString("cliente_nome"),r.getString("equipamento_nome"),r.getString("tecnico_nome")));}return l;}
+ public void atualizarStatus(int id,String status)throws SQLException{try(Connection c=ConexaoMySQL.conectar();PreparedStatement p=c.prepareStatement("UPDATE ordem_servico SET status=? WHERE id=?")){p.setString(1,status);p.setInt(2,id);p.executeUpdate();}}
+}

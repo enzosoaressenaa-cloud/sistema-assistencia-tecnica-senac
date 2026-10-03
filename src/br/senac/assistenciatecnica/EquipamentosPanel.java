@@ -1,0 +1,5 @@
+package br.senac.assistenciatecnica;
+import javax.swing.*;import javax.swing.table.*;import java.awt.*;import java.sql.*;
+public class EquipamentosPanel extends JPanel{
+ public EquipamentosPanel(){setLayout(new BorderLayout(10,10));setBorder(BorderFactory.createEmptyBorder(20,20,20,20));JLabel h=new JLabel("Equipamentos");h.setFont(new Font("SansSerif",1,26));add(h,BorderLayout.NORTH);DefaultTableModel m=new DefaultTableModel(new Object[]{"ID","Tipo","Marca","Modelo","Número de série","Cliente"},0);try{for(Equipamento e:new EquipamentoDAO().listar())m.addRow(new Object[]{e.getId(),e.getTipo(),e.getMarca(),e.getModelo(),e.getNumeroSerie(),e.getClienteNome()});}catch(SQLException e){JOptionPane.showMessageDialog(this,e.getMessage(),"Erro",0);}add(new JScrollPane(new JTable(m)),BorderLayout.CENTER);}
+}
